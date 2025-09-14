@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOT-X AI-Powered Wearable Safety Device</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="app-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>BOT-X Defense System</h1>
+                    <p>AI-Powered Wearable Safety</p>
+                </div>
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" data-view="wearable">Wearable Device</button>
+                    <button class="nav-tab" data-view="dashboard">Defense Dashboard</button>
+                    <button class="nav-tab" data-view="ai-panel">AI Detection</button>
+                    <button class="nav-tab" data-view="emergency">Emergency Response</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="app-container">
+        
+        <!-- Wearable Device Simulator View -->
+        <section class="view active" id="wearable-view">
+            <div class="container">
+                <div class="wearable-interface">
+                    <div class="smartwatch">
+                        <div class="watch-bezel">
+                            <div class="watch-screen">
+                                <div class="watch-header">
+                                    <div class="status-bar">
+                                        <span class="time" id="current-time">11:05 PM</span>
+                                        <div class="indicators">
+                                            <span class="battery-indicator" id="battery">78%</span>
+                                            <span class="lora-indicator active" id="lora-status">LoRa</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="sensor-readings">
+                                    <div class="sensor-grid">
+                                        <div class="sensor-card">
+                                            <div class="sensor-icon">❤️</div>
+                                            <div class="sensor-data">
+                                                <span class="sensor-value" id="heart-rate">72</span>
+                                                <span class="sensor-unit">BPM</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="sensor-card">
+                                            <div class="sensor-icon">🧠</div>
+                                            <div class="sensor-data">
+                                                <span class="sensor-value" id="stress-level">15</span>
+                                                <span class="sensor-unit">%</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="sensor-card">
+                                            <div class="sensor-icon">📍</div>
+                                            <div class="sensor-data">
+                                                <span class="sensor-value" id="location">Patrol Zone Alpha</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="sensor-card">
+                                            <div class="sensor-icon">🤖</div>
+                                            <div class="sensor-data">
+                                                <span class="sensor-value" id="ai-confidence">94</span>
+                                                <span class="sensor-unit">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="emergency-status" id="emergency-status">
+                                    <div class="status-indicator normal">
+                                        <div class="status-dot"></div>
+                                        <span>Normal Operation</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="sos-section">
+                                    <button class="sos-button" id="sos-button">
+                                        <span class="sos-text">SOS</span>
+                                        <span class="sos-instruction">Hold for 3 seconds</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="device-controls">
+                        <div class="control-panel">
+                            <h3>Simulation Controls</h3>
+                            <div class="control-buttons">
+                                <button class="btn btn--secondary" id="simulate-emergency">Simulate Emergency</button>
+                                <button class="btn btn--secondary" id="reset-device">Reset to Normal</button>
+                                <button class="btn btn--secondary" id="toggle-mode">Toggle Demo Mode</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Defense Dashboard View -->
+        <section class="view" id="dashboard-view">
+            <div class="container">
+                <div class="dashboard-layout">
+                    <div class="dashboard-header">
+                        <h2>Defense Command Center</h2>
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <span class="stat-value" id="active-devices">3</span>
+                                <span class="stat-label">Active Devices</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="active-alerts">1</span>
+                                <span class="stat-label">Active Alerts</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value" id="response-teams">2</span>
+                                <span class="stat-label">Response Teams</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="map-panel">
+                            <div class="panel-header">
+                                <h3>Live Device Tracking</h3>
+                                <div class="map-controls">
+                                    <button class="btn btn--sm btn--outline">Zoom In</button>
+                                    <button class="btn btn--sm btn--outline">Center</button>
+                                </div>
+                            </div>
+                            <div class="map-container" id="device-map">
+                                <div class="map-placeholder">
+                                    <div class="map-devices" id="map-devices">
+                                        <!-- Device markers will be populated here -->
+                                    </div>
+                                    <div class="map-legend">
+                                        <div class="legend-item">
+                                            <div class="marker active"></div>
+                                            <span>Active</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="marker emergency"></div>
+                                            <span>Emergency</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <div class="marker team"></div>
+                                            <span>Response Team</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alerts-panel">
+                            <div class="panel-header">
+                                <h3>Live Alerts</h3>
+                                <div class="alert-filters">
+                                    <select class="form-control">
+                                        <option>All Alerts</option>
+                                        <option>High Priority</option>
+                                        <option>Active Only</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="alerts-list" id="alerts-list">
+                                <!-- Alerts will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="devices-panel">
+                            <div class="panel-header">
+                                <h3>Device Status</h3>
+                            </div>
+                            <div class="devices-list" id="devices-list">
+                                <!-- Device status cards will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="communication-panel">
+                            <div class="panel-header">
+                                <h3>LoRa Communications</h3>
+                            </div>
+                            <div class="comm-log" id="comm-log">
+                                <div class="comm-message">
+                                    <span class="comm-time">11:05:23</span>
+                                    <span class="comm-device">BOTX-001</span>
+                                    <span class="comm-text">Heartbeat - Normal</span>
+                                </div>
+                                <div class="comm-message">
+                                    <span class="comm-time">11:04:45</span>
+                                    <span class="comm-device">BOTX-002</span>
+                                    <span class="comm-text">Status Update - Active</span>
+                                </div>
+                                <div class="comm-message emergency">
+                                    <span class="comm-time">11:03:15</span>
+                                    <span class="comm-device">BOTX-003</span>
+                                    <span class="comm-text">EMERGENCY DETECTED - High stress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Detection Panel View -->
+        <section class="view" id="ai-panel-view">
+            <div class="container">
+                <div class="ai-panel-layout">
+                    <div class="panel-header">
+                        <h2>AI Detection Systems</h2>
+                        <div class="ai-status">
+                            <span class="status--success">All Systems Operational</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-grid">
+                        <div class="voice-analysis-panel">
+                            <div class="panel-header">
+                                <h3>Voice Stress Analysis</h3>
+                                <div class="accuracy-badge">94.2% Accuracy</div>
+                            </div>
+                            <div class="waveform-container" style="position: relative; height: 200px;">
+                                <canvas id="voice-waveform"></canvas>
+                            </div>
+                            <div class="analysis-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Stress Level</span>
+                                    <span class="metric-value" id="voice-stress">15%</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Confidence</span>
+                                    <span class="metric-value" id="voice-confidence">94%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="gesture-panel">
+                            <div class="panel-header">
+                                <h3>Gesture Recognition</h3>
+                                <div class="accuracy-badge">91.8% Accuracy</div>
+                            </div>
+                            <div class="accelerometer-viz" style="position: relative; height: 200px;">
+                                <canvas id="accelerometer-chart"></canvas>
+                            </div>
+                            <div class="gesture-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Pattern</span>
+                                    <span class="metric-value" id="gesture-pattern">Normal Movement</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Confidence</span>
+                                    <span class="metric-value" id="gesture-confidence">92%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="fusion-panel">
+                            <div class="panel-header">
+                                <h3>Sensor Fusion Location</h3>
+                                <div class="accuracy-badge">96.5% Accuracy</div>
+                            </div>
+                            <div class="location-viz" style="position: relative; height: 200px;">
+                                <canvas id="location-chart"></canvas>
+                            </div>
+                            <div class="location-metrics">
+                                <div class="metric">
+                                    <span class="metric-label">Precision</span>
+                                    <span class="metric-value" id="location-precision">±2.1m</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">Sources</span>
+                                    <span class="metric-value" id="location-sources">GPS + LoRa</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ml-models-panel">
+                            <div class="panel-header">
+                                <h3>ML Model Performance</h3>
+                            </div>
+                            <div class="models-list" id="models-list">
+                                <!-- ML models status will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Response Interface -->
+        <section class="view" id="emergency-view">
+            <div class="container">
+                <div class="emergency-layout">
+                    <div class="emergency-header">
+                        <h2>Emergency Response Center</h2>
+                        <div class="emergency-status-bar">
+                            <div class="status--error" id="emergency-severity">HIGH PRIORITY ALERT</div>
+                            <div class="response-timer" id="response-timer">Response Time: 00:02:15</div>
+                        </div>
+                    </div>
+                    
+                    <div class="emergency-grid">
+                        <div class="incident-details">
+                            <div class="panel-header">
+                                <h3>Incident Details</h3>
+                                <div class="incident-id">Alert ID: ALERT-001</div>
+                            </div>
+                            <div class="incident-info">
+                                <div class="info-item">
+                                    <span class="label">Device:</span>
+                                    <span class="value">BOTX-003 (Sgt. Meera Patel)</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Type:</span>
+                                    <span class="value">AI Detected Emergency</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Location:</span>
+                                    <span class="value">Command Post (28.6089, 77.2050)</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Detected:</span>
+                                    <span class="value">Voice stress + Elevated heart rate</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Time:</span>
+                                    <span class="value">2025-01-13 11:03:15</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="response-teams">
+                            <div class="panel-header">
+                                <h3>Response Teams</h3>
+                                <button class="btn btn--primary btn--sm">Deploy All</button>
+                            </div>
+                            <div class="teams-list" id="response-teams-list">
+                                <!-- Response teams will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <div class="evidence-panel">
+                            <div class="panel-header">
+                                <h3>Evidence Collection</h3>
+                            </div>
+                            <div class="evidence-items">
+                                <div class="evidence-item">
+                                    <div class="evidence-icon">🎤</div>
+                                    <div class="evidence-info">
+                                        <span class="evidence-type">Audio Recording</span>
+                                        <span class="evidence-status">Secured (Encrypted)</span>
+                                    </div>
+                                </div>
+                                <div class="evidence-item">
+                                    <div class="evidence-icon">📊</div>
+                                    <div class="evidence-info">
+                                        <span class="evidence-type">Sensor Data</span>
+                                        <span class="evidence-status">Logged (5 minutes)</span>
+                                    </div>
+                                </div>
+                                <div class="evidence-item">
+                                    <div class="evidence-icon">📍</div>
+                                    <div class="evidence-info">
+                                        <span class="evidence-type">Location History</span>
+                                        <span class="evidence-status">Tracked (GPS + LoRa)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="communication-center">
+                            <div class="panel-header">
+                                <h3>Emergency Communications</h3>
+                            </div>
+                            <div class="comm-interface">
+                                <div class="comm-history" id="emergency-comm-history">
+                                    <div class="comm-message system">
+                                        <span class="comm-time">11:03:15</span>
+                                        <span class="comm-text">Emergency detected - Auto-alert sent</span>
+                                    </div>
+                                    <div class="comm-message outbound">
+                                        <span class="comm-time">11:03:20</span>
+                                        <span class="comm-text">Command to BOTX-003: Respond if able</span>
+                                    </div>
+                                    <div class="comm-message inbound">
+                                        <span class="comm-time">11:03:45</span>
+                                        <span class="comm-text">BOTX-003: Need immediate assistance</span>
+                                    </div>
+                                </div>
+                                <div class="comm-input">
+                                    <input type="text" class="form-control" placeholder="Send emergency command...">
+                                    <button class="btn btn--primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading and Status Modals -->
+    <div class="modal hidden" id="alert-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Emergency Alert</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-details" id="modal-alert-details">
+                    <!-- Alert details will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" id="acknowledge-alert">Acknowledge</button>
+                <button class="btn btn--secondary" id="deploy-response">Deploy Response</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
